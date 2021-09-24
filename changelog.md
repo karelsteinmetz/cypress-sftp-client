@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.0.3
+
+-   Created cypress spec example.
+
 ### 0.0.2
 
 -   Updated cypress dependency to ^8.0.1.

@@ -15,3 +15,7 @@ webpack.config.plugin.ts
 **.js.*
 plugin/**.js
 plugin/**.js.*
+/cypress/support/*.js
+/cypress/support/*.map
+/cypress/integration/*.js
+/cypress/integration/*.map

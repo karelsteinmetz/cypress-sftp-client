@@ -29,58 +29,66 @@ export = register;
 ## Usage
 
 ```tsx
+const debug = true;
 const rootDir = "sftp_client_test";
 const connectionSettings = {
     host: "127.0.0.1",
     port: 22,
-    userName: "userName",
-    password: "********",
+    userName: "user",
+    password: "password",
     dir: rootDir,
 };
 
+const dirInput = "input";
+const fileName = dirInput + "/test.txt";
 cy.sftpCreateDirectory({
     debug,
     connectionSettings,
-    directoryName: ["input", "failed", "ack"],
-});
-
-cy.sftpList({
-    debug,
-    directory: "input",
-    connectionSettings,
-}).then((listResult) => {
-    cy.log("listResult: " + listResult.files.map((f) => `${f.fileName} - ${f.modifiedDate}`), listResult);
-});
-
-const latestFile = listResult.files[0];
-const inputFileName = "input/" + latestFile.fileName;
-cy.sftpDownload({
-    debug,
-    connectionSettings,
-    fileName: "input/test.txt",
-}).then((f) => {
-    cy.log(f.fileContent);
+    directoryName: [dirInput],
+}).then((r) => {
+    cy.log("sftpCreateDirectory result", r);
 });
 
 cy.sftpUpload({
     debug,
     connectionSettings,
     content: "content",
-    fileName: "input/test.txt",
-}).then(() => {
-    cy.sftpExists({
-        debug,
-        connectionSettings,
-        fileName,
-    }).then((r) => {
-        expect(r.isExisting).is.be.true;
-    });
+    fileName,
+}).then((r) => {
+    cy.log("sftpUpload result", r);
+});
+
+cy.sftpExists({
+    debug,
+    connectionSettings,
+    fileName,
+}).then((r) => {
+    cy.log("sftpExists result", r);
+    expect(r.isExisting).is.be.true;
+});
+
+cy.sftpList({
+    debug,
+    directory: dirInput,
+    connectionSettings,
+}).then((r) => {
+    cy.log("sftpList result" + r.files.map((f) => `${f.fileName} - ${f.modifiedDate}`), r);
+});
+
+cy.sftpDownload({
+    debug,
+    connectionSettings,
+    fileName: fileName,
+}).then((r) => {
+    cy.log("sftpDownload result" + r.fileContent, r);
 });
 
 cy.sftpDelete({
     debug,
     connectionSettings,
-    fileNames: ["input/test.txt"],
+    fileNames: [fileName],
+}).then((r) => {
+    cy.log("sftpDelete result", r);
 });
 ```
 

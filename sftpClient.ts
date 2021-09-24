@@ -32,6 +32,16 @@ async function run(debug: boolean) {
 
     console.log("sftpUpload: ", uploadResult);
 
+    const uploadFileName2 = "input/test2.txt";
+    const uploadResult2 = await sftpUpload({
+        content: "data",
+        fileName: uploadFileName2,
+        debug,
+        connectionSettings,
+    });
+
+    console.log("sftpUpload2: ", uploadResult2);
+
     const existsResult = await sftpExists({
         fileName: uploadFileName,
         debug,
@@ -63,7 +73,7 @@ async function run(debug: boolean) {
     console.log("sftpDownload: ", fileContent);
 
     const deleteResult = await sftpDelete({
-        fileNames: inputFileName,
+        fileNames: [uploadFileName, uploadFileName2],
         debug,
         connectionSettings,
     });
