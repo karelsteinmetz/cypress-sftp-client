@@ -1,6 +1,6 @@
 {
     "name": "cypress-sftp-client",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Cypress plugin for SFTP client",
     "main": "index",
     "scripts": {
@@ -17,7 +17,7 @@
     },
     "dependencies": {
         "@types/ssh2-sftp-client": "^7.0.0",
-        "cypress": "^7.2.0",
+        "cypress": "^7.2.0 || ^8.0.1",
         "ssh2-sftp-client": "^7.0.3"
     },
     "devDependencies": {
