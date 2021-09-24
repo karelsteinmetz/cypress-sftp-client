@@ -1,0 +1,6 @@
+{
+    "name": "cypress-sftp-client-plugin",
+    "description": "Internal plugin package",
+    "main": "dist/sftpClient.js",
+    "types": "sftpClient.d.ts"
+}
