@@ -1,12 +1,6 @@
 /// <reference types="cypress" />
 /// <reference path="plugin/common.d.ts" />
 
-declare namespace Cypress {
-    interface ResolvedConfigOptions {
-        sftpDebugLog: string;
-    }
-}
-
 interface ISftpCreateDirectoryCommandOptions extends Partial<Cypress.Loggable & Cypress.Timeoutable>, ISftpCreateDirectoryOptions {}
 interface ISftpListCommandOptions extends Partial<Cypress.Loggable & Cypress.Timeoutable>, ISftpListOptions {}
 interface ISftpExistsCommandOptions extends Partial<Cypress.Loggable & Cypress.Timeoutable>, ISftpExistsOptions {}
@@ -15,6 +9,10 @@ interface ISftpUploadCommandOptions extends Partial<Cypress.Loggable & Cypress.T
 interface ISftpDeleteCommandOptions extends Partial<Cypress.Loggable & Cypress.Timeoutable>, ISftpDeleteOptions {}
 
 declare namespace Cypress {
+    interface ResolvedConfigOptions {
+        sftpDebugLog: string;
+    }
+
     interface Chainable<Subject> {
         sftpCreateDirectory(config: ISftpCreateDirectoryCommandOptions): Cypress.Chainable<ISftpCreateDirectoryResult>;
         sftpList(config: ISftpListCommandOptions): Cypress.Chainable<ISftpListResult>;

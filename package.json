@@ -1,8 +1,8 @@
 {
     "name": "cypress-sftp-client",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Cypress plugin for SFTP client",
-    "main": "index",
+    "main": "index.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
