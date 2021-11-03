@@ -5,6 +5,7 @@
 -   Fixed package main file in package.json
 -   Fixed directory creation if already exists.
 -   Versioned built commands.ts.
+-   Added vscode launch.json
 
 ### 0.0.3
 
