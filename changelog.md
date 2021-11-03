@@ -3,6 +3,7 @@
 ### 0.0.4
 
 -   Fixed package main file in package.json
+-   Fixed directory creation if already exists.
 
 ### 0.0.3
 

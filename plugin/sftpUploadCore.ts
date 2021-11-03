@@ -16,13 +16,17 @@ export async function sftpCreateDirectory(
             username: config.connectionSettings.userName,
             password: config.connectionSettings.password,
         });
-        log(config, "CreateDirectory - SFTP Connection established.");
+        log(config, "CreateDirectory - SFTP Connection established.", config.connectionSettings?.dir);
+
+        if (config.connectionSettings?.dir !== undefined) {
+            await createIfDoesNotExists(config.connectionSettings?.dir, sftp);
+        }
         if (Array.isArray(config.directoryName)) {
             for (const directoryName of config.directoryName) {
-                await createIfDoesNotExists(config, directoryName, sftp);
+                await createIfDoesNotExists(createDirectoryPath(config, directoryName), sftp);
             }
         } else {
-            await createIfDoesNotExists(config, config.directoryName, sftp);
+            await createIfDoesNotExists(createDirectoryPath(config, config.directoryName), sftp);
         }
         log(config, "CreateDirectory - Directory created.");
         await sftp.end();
@@ -38,6 +42,23 @@ export async function sftpCreateDirectory(
         };
     } finally {
         log(config, "sftpCreateDirectory - Finished");
+    }
+
+    async function createIfDoesNotExists(directoryPath: string, sftp: Sftp) {
+        try {
+            const pathStat = await sftp.stat(directoryPath);
+            if (pathStat.isDirectory) {
+                return;
+            }
+        } catch (error) {
+            log(config, "Error during stat check: ", error);
+        }
+
+        try {
+            await sftp.mkdir(directoryPath, true);
+        } catch (error) {
+            log(config, "Error during createIfDoesNotExists: ", error);
+        }
     }
 }
 
@@ -201,10 +222,8 @@ export async function sftpDelete(config: ISftpDeleteOptions): Promise<ISftpDelet
     }
 }
 
-async function createIfDoesNotExists(config: ISftpCreateDirectoryOptions, fileName: string, sftp: Sftp) {
-    const directoryPath = (config.connectionSettings?.dir || "") + "/" + fileName;
-    const isExisting = await sftp.exists(directoryPath);
-    !isExisting && (await sftp.mkdir(directoryPath, true));
+function createDirectoryPath(config: ISftpCreateDirectoryOptions, directoryName: string) {
+    return (config.connectionSettings?.dir || "") + "/" + directoryName;
 }
 
 function log(config: IDebugSftpOptions, message?: any, ...optionalParams: any[]): void {
