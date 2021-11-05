@@ -1,7 +1,6 @@
 tmp
-npm-debug.log
+*.log
 yarn.lock
-yarn-error.log
 .vscode
 package-lock.json
 .eslintrc

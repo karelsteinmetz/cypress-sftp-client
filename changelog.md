@@ -1,8 +1,12 @@
 # Changelog
 
+### 0.0.5
+
+-   Ignored all logs in root during npm publishing.
+
 ### 0.0.4
 
--   Fixed package main file in package.json
+-   Fixed package main file in package.json.
 -   Fixed directory creation if already exists.
 -   Versioned built commands.ts.
 -   Added vscode launch.json
@@ -17,4 +21,4 @@
 
 ### 0.0.1
 
--   created tasks sftpCreateDirectory, sftpList, sftpExists, sftpDownload, sftpUpload, sftpDelete
+-   Created tasks sftpCreateDirectory, sftpList, sftpExists, sftpDownload, sftpUpload, sftpDelete.
