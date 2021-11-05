@@ -3,6 +3,7 @@
 ### 0.0.5
 
 -   Ignored all logs in root during npm publishing.
+-   Upgraded ssh2-sftp-client package.
 
 ### 0.0.4
 
