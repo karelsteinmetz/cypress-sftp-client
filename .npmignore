@@ -9,8 +9,7 @@ package-lock.json
 cypress.json
 cypress
 node_modules
-webpack.config.ts
-webpack.config.plugin.ts
+webpack.config.*
 sftpClient.*
 plugin/**.js
 plugin/**.js.*
