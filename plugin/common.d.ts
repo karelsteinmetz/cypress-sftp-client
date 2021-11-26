@@ -3,6 +3,7 @@ interface ISftpConnectionSettings {
     port: number;
     userName: string;
     password: string;
+    protocol?: "IPv4" | "IPv6";
     dir?: string;
 }
 

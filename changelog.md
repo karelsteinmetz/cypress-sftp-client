@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.0.6
+
+-   Added optional choose of addressing method - "IPv4" | "IPv6".
+
 ### 0.0.5
 
 -   Ignored all logs in root during npm publishing.

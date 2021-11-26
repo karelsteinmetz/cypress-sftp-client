@@ -15,6 +15,8 @@ export async function sftpCreateDirectory(
             port: config.connectionSettings.port,
             username: config.connectionSettings.userName,
             password: config.connectionSettings.password,
+            forceIPv4: config.connectionSettings.protocol === "IPv4",
+            forceIPv6: config.connectionSettings.protocol === "IPv6",
         });
         log(config, "CreateDirectory - SFTP Connection established.", config.connectionSettings?.dir);
 
