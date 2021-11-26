@@ -1,11 +1,12 @@
 describe("SFTP client", () => {
     const debug = true;
     const rootDir = "sftp_client_test";
-    const connectionSettings = {
+    const connectionSettings: ISftpConnectionSettings = {
         host: "127.0.0.1",
         port: 22,
         userName: "user",
         password: "password",
+        protocol: "IPv4", // "IPv6"
         dir: rootDir,
     };
 

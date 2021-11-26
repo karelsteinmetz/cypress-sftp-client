@@ -1,6 +1,6 @@
 {
     "name": "cypress-sftp-client",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Cypress plugin for SFTP client",
     "main": "index.d.ts",
     "scripts": {
