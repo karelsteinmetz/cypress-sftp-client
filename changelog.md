@@ -1,5 +1,7 @@
 # Changelog
 
+### 0.1.0
+
 ### 0.0.6
 
 -   Added optional choose of addressing method - "IPv4" | "IPv6".
