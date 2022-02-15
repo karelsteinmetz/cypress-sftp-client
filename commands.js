@@ -1,8 +1,6 @@
 "use strict";
 /// <reference path="./index.d.ts" />
-Cypress.Commands.add("sftpCreateDirectory", {
-    prevSubject: false,
-}, function (options) {
+Cypress.Commands.add("sftpCreateDirectory", function (options) {
     var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
         _log: Cypress.log({ message: [name] }),
     });
@@ -17,9 +15,7 @@ Cypress.Commands.add("sftpCreateDirectory", {
         .then(function (report) { return sftpResultLog(cmdOptions, report); })
         .should(function (report) { return expect(report.status, "it failed because " + report.error).to.be.true; });
 });
-Cypress.Commands.add("sftpList", {
-    prevSubject: false,
-}, function (options) {
+Cypress.Commands.add("sftpList", function (options) {
     var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
         _log: Cypress.log({ message: [name] }),
     });
@@ -34,9 +30,7 @@ Cypress.Commands.add("sftpList", {
         .then(function (report) { return sftpResultLog(cmdOptions, report); })
         .should(function (report) { return expect(report.status, "it failed because " + report.error).to.be.true; });
 });
-Cypress.Commands.add("sftpExists", {
-    prevSubject: false,
-}, function (options) {
+Cypress.Commands.add("sftpExists", function (options) {
     var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
         _log: Cypress.log({ message: [name] }),
     });
@@ -51,9 +45,7 @@ Cypress.Commands.add("sftpExists", {
         .then(function (report) { return sftpResultLog(cmdOptions, report); })
         .should(function (report) { return expect(report.status, "it failed because " + report.error).to.be.true; });
 });
-Cypress.Commands.add("sftpDownload", {
-    prevSubject: false,
-}, function (options) {
+Cypress.Commands.add("sftpDownload", function (options) {
     var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
         _log: Cypress.log({ message: [name] }),
     });
@@ -68,9 +60,7 @@ Cypress.Commands.add("sftpDownload", {
         .then(function (report) { return sftpResultLog(cmdOptions, report); })
         .should(function (report) { return expect(report.status, "it failed because " + report.error).to.be.true; });
 });
-Cypress.Commands.add("sftpUpload", {
-    prevSubject: false,
-}, function (options) {
+Cypress.Commands.add("sftpUpload", function (options) {
     var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
         _log: Cypress.log({ message: [name] }),
     });
@@ -86,9 +76,7 @@ Cypress.Commands.add("sftpUpload", {
         .then(function (report) { return sftpResultLog(cmdOptions, report); })
         .should(function (report) { return expect(report.status, "it failed because " + report.error).to.be.true; });
 });
-Cypress.Commands.add("sftpDelete", {
-    prevSubject: false,
-}, function (options) {
+Cypress.Commands.add("sftpDelete", function (options) {
     var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
         _log: Cypress.log({ message: [name] }),
     });

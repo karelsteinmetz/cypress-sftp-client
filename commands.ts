@@ -8,10 +8,7 @@ interface ISftpCreateDirectoryCommandOptionsWithLog extends ISftpCreateDirectory
 
 Cypress.Commands.add(
     "sftpCreateDirectory",
-    {
-        prevSubject: false,
-    },
-    (options: ISftpCreateDirectoryCommandOptionsWithLog): Cypress.Chainable<ISftpCreateDirectoryResult> => {
+    (options: ISftpCreateDirectoryCommandOptions): Cypress.Chainable<ISftpCreateDirectoryResult> => {
         const cmdOptions: ISftpCreateDirectoryCommandOptionsWithLog = Object.assign(
             typeof options === "object" ? options : ({} as ISftpCreateDirectoryCommandOptionsWithLog),
             {
@@ -41,10 +38,7 @@ interface ISftpListCommandOptionsWithLog extends ISftpListCommandOptions, ICypre
 
 Cypress.Commands.add(
     "sftpList",
-    {
-        prevSubject: false,
-    },
-    (options: ISftpListCommandOptionsWithLog): Cypress.Chainable<ISftpListResult> => {
+    (options: ISftpListCommandOptions): Cypress.Chainable<ISftpListResult> => {
         const cmdOptions: ISftpListCommandOptionsWithLog = Object.assign(
             typeof options === "object" ? options : ({} as ISftpListCommandOptionsWithLog),
             {
@@ -74,10 +68,7 @@ interface ISftpExistsCommandOptionsWithLog extends ISftpExistsCommandOptions, IC
 
 Cypress.Commands.add(
     "sftpExists",
-    {
-        prevSubject: false,
-    },
-    (options: ISftpExistsCommandOptionsWithLog): Cypress.Chainable<ISftpExistsResult> => {
+    (options: ISftpExistsCommandOptions): Cypress.Chainable<ISftpExistsResult> => {
         const cmdOptions: ISftpExistsCommandOptionsWithLog = Object.assign(
             typeof options === "object" ? options : ({} as ISftpExistsCommandOptionsWithLog),
             {
@@ -107,10 +98,7 @@ interface ISftpDownloadCommandOptionsWithLog extends ISftpDownloadCommandOptions
 
 Cypress.Commands.add(
     "sftpDownload",
-    {
-        prevSubject: false,
-    },
-    (options: ISftpDownloadCommandOptionsWithLog): Cypress.Chainable<ISftpDownloadResult> => {
+    (options: ISftpDownloadCommandOptions): Cypress.Chainable<ISftpDownloadResult> => {
         const cmdOptions: ISftpDownloadCommandOptionsWithLog = Object.assign(
             typeof options === "object" ? options : ({} as ISftpDownloadCommandOptionsWithLog),
             {
@@ -140,10 +128,7 @@ interface ISftpUploadCommandOptionsWithLog extends ISftpUploadCommandOptions, IC
 
 Cypress.Commands.add(
     "sftpUpload",
-    {
-        prevSubject: false,
-    },
-    (options: ISftpUploadCommandOptionsWithLog): Cypress.Chainable<ISftpUploadResult> => {
+    (options: ISftpUploadCommandOptions): Cypress.Chainable<ISftpUploadResult> => {
         const cmdOptions: ISftpUploadCommandOptionsWithLog = Object.assign(
             typeof options === "object" ? options : ({} as ISftpUploadCommandOptionsWithLog),
             {
@@ -174,10 +159,7 @@ interface ISftpDeleteCommandOptionsWithLog extends ISftpDeleteCommandOptions, IC
 
 Cypress.Commands.add(
     "sftpDelete",
-    {
-        prevSubject: false,
-    },
-    (options: ISftpDeleteCommandOptionsWithLog): Cypress.Chainable<ISftpDeleteResult> => {
+    (options: ISftpDeleteCommandOptions): Cypress.Chainable<ISftpDeleteResult> => {
         const cmdOptions: ISftpDeleteCommandOptionsWithLog = Object.assign(
             typeof options === "object" ? options : ({} as ISftpDeleteCommandOptionsWithLog),
             {
