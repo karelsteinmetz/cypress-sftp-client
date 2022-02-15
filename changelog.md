@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.0.0
+
+-   Cypress updated to 9.4.1.
+
 ### 0.1.0
 
 ### 0.0.6
