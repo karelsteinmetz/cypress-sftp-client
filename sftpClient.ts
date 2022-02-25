@@ -1,4 +1,12 @@
-import { sftpCreateDirectory, sftpDelete, sftpDownload, sftpExists, sftpList, sftpUpload } from "./plugin/sftpUploadCore";
+import {
+    sftpCreateDirectory,
+    sftpDelete,
+    sftpDownload,
+    sftpExists,
+    sftpList,
+    sftpRemoveDirectory,
+    sftpUpload,
+} from "./plugin/sftpUploadCore";
 
 run(true)
     .catch((e) => {
@@ -19,7 +27,6 @@ async function run(debug: boolean) {
     };
 
     const createDirectoryResult = await sftpCreateDirectory({ debug, connectionSettings, directoryName: ["input", "failed", "ack"] });
-
     console.log("createDirectoryResult: ", createDirectoryResult);
 
     const uploadFileName = "input/test.txt";
@@ -29,7 +36,6 @@ async function run(debug: boolean) {
         debug,
         connectionSettings,
     });
-
     console.log("sftpUpload: ", uploadResult);
 
     const uploadFileName2 = "input/test2.txt";
@@ -39,7 +45,6 @@ async function run(debug: boolean) {
         debug,
         connectionSettings,
     });
-
     console.log("sftpUpload2: ", uploadResult2);
 
     const existsResult = await sftpExists({
@@ -47,7 +52,6 @@ async function run(debug: boolean) {
         debug,
         connectionSettings,
     });
-
     console.log("existsResult: ", existsResult);
 
     const listResult = await sftpList({
@@ -55,7 +59,6 @@ async function run(debug: boolean) {
         debug,
         connectionSettings,
     });
-
     console.log("listResult: " + listResult.files.map((f) => `${f.fileName} - ${f.modifiedDate}`), listResult);
 
     if (listResult.files.length === 0) {
@@ -69,7 +72,6 @@ async function run(debug: boolean) {
         debug,
         connectionSettings,
     });
-
     console.log("sftpDownload: ", fileContent);
 
     const deleteResult = await sftpDelete({
@@ -77,6 +79,8 @@ async function run(debug: boolean) {
         debug,
         connectionSettings,
     });
-
     console.log("sftpDelete: ", deleteResult);
+
+    const removeDirectoryResult = await sftpRemoveDirectory({ debug, connectionSettings, directoryName: ["input", "failed", "ack"] });
+    console.log("removeDirectoryResult: ", removeDirectoryResult);
 }

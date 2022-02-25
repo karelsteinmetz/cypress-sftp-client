@@ -63,5 +63,13 @@ describe("SFTP client", () => {
         }).then((r) => {
             cy.log("sftpDelete result", r);
         });
+
+        cy.sftpRemoveDirectory({
+            debug,
+            connectionSettings,
+            directoryName: [dirInput],
+        }).then((r) => {
+            cy.log("sftpRemoveDirectory result", r);
+        });
     });
 });

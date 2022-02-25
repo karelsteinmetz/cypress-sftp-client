@@ -15,6 +15,21 @@ Cypress.Commands.add("sftpCreateDirectory", function (options) {
         .then(function (report) { return sftpResultLog(cmdOptions, report); })
         .should(function (report) { return expect(report.status, "it failed because " + report.error).to.be.true; });
 });
+Cypress.Commands.add("sftpRemoveDirectory", function (options) {
+    var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
+        _log: Cypress.log({ message: [name] }),
+    });
+    var callWithDebug = !!Cypress.config("sftpDebugLog");
+    return cy
+        .task("sftpRemoveDirectory", {
+        connectionSettings: options.connectionSettings,
+        directoryName: options.directoryName,
+        debug: callWithDebug,
+    }, Object.assign(cmdOptions, { log: false }))
+        .then(function (result) { return result; })
+        .then(function (report) { return sftpResultLog(cmdOptions, report); })
+        .should(function (report) { return expect(report.status, "it failed because " + report.error).to.be.true; });
+});
 Cypress.Commands.add("sftpList", function (options) {
     var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
         _log: Cypress.log({ message: [name] }),

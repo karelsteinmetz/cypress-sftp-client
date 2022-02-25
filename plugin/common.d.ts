@@ -21,6 +21,12 @@ interface ISftpCreateDirectoryOptions extends ISftpConnectionOptions, IDebugSftp
 
 interface ISftpCreateDirectoryResult extends ISftpResultBase {}
 
+interface ISftpRemoveDirectoryOptions extends ISftpConnectionOptions, IDebugSftpOptions {
+    directoryName: string | string[];
+}
+
+interface ISftpRemoveDirectoryResult extends ISftpResultBase {}
+
 interface ISftpListOptions extends ISftpConnectionOptions, IDebugSftpOptions {
     directory?: string;
 }

@@ -34,6 +34,36 @@ Cypress.Commands.add(
     }
 );
 
+interface ISftpRemoveDirectoryCommandOptionsWithLog extends ISftpRemoveDirectoryCommandOptions, ICypressLogOptions {}
+
+Cypress.Commands.add(
+    "sftpRemoveDirectory",
+    (options: ISftpRemoveDirectoryCommandOptions): Cypress.Chainable<ISftpRemoveDirectoryResult> => {
+        const cmdOptions: ISftpRemoveDirectoryCommandOptionsWithLog = Object.assign(
+            typeof options === "object" ? options : ({} as ISftpRemoveDirectoryCommandOptionsWithLog),
+            {
+                _log: Cypress.log({ message: [name] }),
+            }
+        );
+
+        const callWithDebug = !!Cypress.config("sftpDebugLog");
+
+        return cy
+            .task(
+                "sftpRemoveDirectory",
+                <ISftpRemoveDirectoryOptions>{
+                    connectionSettings: options.connectionSettings,
+                    directoryName: options.directoryName,
+                    debug: callWithDebug,
+                },
+                Object.assign(cmdOptions, { log: false })
+            )
+            .then((result) => (result as any) as ISftpRemoveDirectoryResult)
+            .then((report) => sftpResultLog(cmdOptions, report))
+            .should((report) => expect(report.status, `it failed because ${report.error}`).to.be.true);
+    }
+);
+
 interface ISftpListCommandOptionsWithLog extends ISftpListCommandOptions, ICypressLogOptions {}
 
 Cypress.Commands.add(

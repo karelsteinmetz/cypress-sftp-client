@@ -1,11 +1,14 @@
 /// <reference path="common.d.ts" />
 
-import { sftpCreateDirectory, sftpDelete, sftpDownload, sftpExists, sftpList, sftpUpload } from "./sftpUploadCore";
+import { sftpCreateDirectory, sftpDelete, sftpDownload, sftpExists, sftpList, sftpRemoveDirectory, sftpUpload } from "./sftpUploadCore";
 
 function register(on: Cypress.PluginEvents): void {
     on("task", {
         async sftpCreateDirectory(config: ISftpCreateDirectoryOptions): Promise<ISftpCreateDirectoryResult> {
             return await sftpCreateDirectory(config);
+        },
+        async sftpRemoveDirectory(config: ISftpRemoveDirectoryOptions): Promise<ISftpRemoveDirectoryResult> {
+            return await sftpRemoveDirectory(config);
         },
         async sftpList(config: ISftpListOptions): Promise<ISftpListResult> {
             return await sftpList(config);

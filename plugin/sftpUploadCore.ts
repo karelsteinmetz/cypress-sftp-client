@@ -25,10 +25,10 @@ export async function sftpCreateDirectory(
         }
         if (Array.isArray(config.directoryName)) {
             for (const directoryName of config.directoryName) {
-                await createIfDoesNotExists(createDirectoryPath(config, directoryName), sftp);
+                await createIfDoesNotExists(addRootDirectoryPath(config, directoryName), sftp);
             }
         } else {
-            await createIfDoesNotExists(createDirectoryPath(config, config.directoryName), sftp);
+            await createIfDoesNotExists(addRootDirectoryPath(config, config.directoryName), sftp);
         }
         log(config, "CreateDirectory - Directory created.");
         await sftp.end();
@@ -60,6 +60,63 @@ export async function sftpCreateDirectory(
             await sftp.mkdir(directoryPath, true);
         } catch (error) {
             log(config, "Error during createIfDoesNotExists: ", error);
+        }
+    }
+}
+
+export async function sftpRemoveDirectory(
+    config: ISftpRemoveDirectoryOptions
+): Promise<ISftpRemoveDirectoryResult | PromiseLike<ISftpRemoveDirectoryResult>> {
+    log(config, "sftpRemoveDirectory - Start");
+    const sftp = new Sftp();
+    try {
+        await sftp.connect({
+            host: config.connectionSettings.host,
+            port: config.connectionSettings.port,
+            username: config.connectionSettings.userName,
+            password: config.connectionSettings.password,
+            forceIPv4: config.connectionSettings.protocol === "IPv4",
+            forceIPv6: config.connectionSettings.protocol === "IPv6",
+        });
+        log(config, "RemoveDirectory - SFTP Connection established.", config.connectionSettings?.dir);
+
+        if (Array.isArray(config.directoryName)) {
+            for (const directoryName of config.directoryName) {
+                await removeIfExists(addRootDirectoryPath(config, directoryName), sftp);
+            }
+        } else {
+            await removeIfExists(addRootDirectoryPath(config, config.directoryName), sftp);
+        }
+        log(config, "RemoveDirectory - Directory removed.");
+        await sftp.end();
+        log(config, "RemoveDirectory - SFTP Connection closed.");
+        return {
+            status: true,
+        };
+    } catch (err) {
+        log(config, "sftpRemoveDirectory - Failed", err);
+        return {
+            status: false,
+            error: `Error during SFTP directory removing: ${JSON.stringify(err)}`,
+        };
+    } finally {
+        log(config, "sftpRemoveDirectory - Finished");
+    }
+
+    async function removeIfExists(directoryPath: string, sftp: Sftp) {
+        try {
+            const pathStat = await sftp.stat(directoryPath);
+            if (!pathStat.isDirectory) {
+                return;
+            }
+        } catch (error) {
+            log(config, "Error during stat check: ", error);
+        }
+
+        try {
+            await sftp.rmdir(directoryPath, true);
+        } catch (error) {
+            log(config, "Error during removeIfExists: ", error);
         }
     }
 }
@@ -224,7 +281,7 @@ export async function sftpDelete(config: ISftpDeleteOptions): Promise<ISftpDelet
     }
 }
 
-function createDirectoryPath(config: ISftpCreateDirectoryOptions, directoryName: string) {
+function addRootDirectoryPath(config: ISftpCreateDirectoryOptions, directoryName: string) {
     return (config.connectionSettings?.dir || "") + "/" + directoryName;
 }
 
