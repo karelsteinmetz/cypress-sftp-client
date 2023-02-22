@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.0.0
+
+-   Updated ssh2-sftp-client
+
 ### 1.1.0
 
 -   Added sftpRemoveDirectory
