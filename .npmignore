@@ -9,7 +9,7 @@ cypress.json
 cypress
 node_modules
 webpack.config.*
-sftpClient.*
+/sftpClient.*
 plugin/**.js
 plugin/**.js.*
 /cypress/support/*.js

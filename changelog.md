@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.0.1
+
+-   Fixed sftpClient.js packing through npmignore.
+
 ### 2.0.0
 
 -   Updated ssh2-sftp-client
