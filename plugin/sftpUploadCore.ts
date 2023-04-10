@@ -1,6 +1,7 @@
 /// <reference path="common.d.ts" />
 
 import * as Sftp from "ssh2-sftp-client";
+import * as path from "path";
 
 const writeStreamOptions = { encoding: "utf8" };
 
@@ -25,10 +26,10 @@ export async function sftpCreateDirectory(
         }
         if (Array.isArray(config.directoryName)) {
             for (const directoryName of config.directoryName) {
-                await createIfDoesNotExists(addRootDirectoryPath(config, directoryName), sftp);
+                await createIfDoesNotExists(pathCombine(config.connectionSettings.dir, directoryName), sftp);
             }
         } else {
-            await createIfDoesNotExists(addRootDirectoryPath(config, config.directoryName), sftp);
+            await createIfDoesNotExists(pathCombine(config.connectionSettings.dir, config.directoryName), sftp);
         }
         log(config, "CreateDirectory - Directory created.");
         await sftp.end();
@@ -82,10 +83,10 @@ export async function sftpRemoveDirectory(
 
         if (Array.isArray(config.directoryName)) {
             for (const directoryName of config.directoryName) {
-                await removeIfExists(addRootDirectoryPath(config, directoryName), sftp);
+                await removeIfExists(pathCombine(config.connectionSettings.dir, directoryName), sftp);
             }
         } else {
-            await removeIfExists(addRootDirectoryPath(config, config.directoryName), sftp);
+            await removeIfExists(pathCombine(config.connectionSettings.dir, config.directoryName), sftp);
         }
         log(config, "RemoveDirectory - Directory removed.");
         await sftp.end();
@@ -132,7 +133,7 @@ export async function sftpList(config: ISftpListOptions): Promise<ISftpListResul
             password: config.connectionSettings.password,
         });
         log(config, "list - SFTP Connection established.");
-        const fileInfos = await sftp.list((config.connectionSettings?.dir || "") + "/" + (config.directory || ""));
+        const fileInfos = await sftp.list(pathCombine(config.connectionSettings.dir, config.directory || ""));
         log(config, "list - files listed.");
         await sftp.end();
         log(config, "list - SFTP Connection closed.");
@@ -165,7 +166,7 @@ export async function sftpExists(config: ISftpExistsOptions): Promise<ISftpExist
             password: config.connectionSettings.password,
         });
         log(config, "Exists - SFTP Connection established.");
-        const isExisting = await sftp.exists((config.connectionSettings?.dir || "") + "/" + config.fileName);
+        const isExisting = await sftp.exists(pathCombine(config.connectionSettings?.dir, config.fileName));
         log(config, "Exists - file existing checked.");
         await sftp.end();
         log(config, "Exists - SFTP Connection closed.");
@@ -196,7 +197,7 @@ export async function sftpDownload(config: ISftpDownloadOptions): Promise<ISftpD
             password: config.connectionSettings.password,
         });
         log(config, "download - SFTP Connection established.");
-        const file = await sftp.get((config.connectionSettings?.dir || "") + "/" + config.fileName);
+        const file = await sftp.get(pathCombine(config.connectionSettings?.dir, config.fileName));
         log(config, "download - file downloaded.");
         await sftp.end();
         log(config, "download - SFTP Connection closed.");
@@ -228,7 +229,9 @@ export async function sftpUpload(config: ISftpUploadOptions): Promise<ISftpUploa
         });
         log(config, "upload - SFTP Connection established.");
         const contentBuffer = Buffer.from(config.content, "utf8");
-        await sftp.put(contentBuffer, (config.connectionSettings?.dir || "") + "/" + config.fileName, { writeStreamOptions });
+        await sftp.put(contentBuffer, pathCombine(config.connectionSettings?.dir, config.fileName), {
+            writeStreamOptions,
+        });
         log(config, "upload - Data uploaded.");
         await sftp.end();
         log(config, "upload - SFTP Connection closed.");
@@ -259,10 +262,10 @@ export async function sftpDelete(config: ISftpDeleteOptions): Promise<ISftpDelet
         log(config, "Delete - SFTP Connection established.");
         if (Array.isArray(config.fileNames)) {
             for (const fileName of config.fileNames) {
-                await sftp.delete((config.connectionSettings?.dir || "") + "/" + fileName, true);
+                await sftp.delete(pathCombine(config.connectionSettings?.dir, fileName), true);
             }
         } else {
-            await sftp.delete((config.connectionSettings?.dir || "") + "/" + config.fileNames, true);
+            await sftp.delete(pathCombine(config.connectionSettings?.dir, config.fileNames), true);
         }
         log(config, "Delete - Data Deleted.");
         await sftp.end();
@@ -281,8 +284,11 @@ export async function sftpDelete(config: ISftpDeleteOptions): Promise<ISftpDelet
     }
 }
 
-function addRootDirectoryPath(config: ISftpCreateDirectoryOptions, directoryName: string) {
-    return (config.connectionSettings?.dir || "") + "/" + directoryName;
+function pathCombine(rootDir: string | undefined, name: string) {
+    if (rootDir === undefined) {
+        return name;
+    }
+    return rootDir + path.delimiter + name;
 }
 
 function log(config: IDebugSftpOptions, message?: any, ...optionalParams: any[]): void {

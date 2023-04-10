@@ -1,5 +1,9 @@
 # Changelog
 
+### 2.0.2
+
+-   Made path sanitization for Linux - removed starting path with "/" without dir in configuration.
+
 ### 2.0.1
 
 -   Fixed sftpClient.js packing through npmignore.
