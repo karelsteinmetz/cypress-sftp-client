@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.0
+
+-   Used real path sftp wrapping for each dir/file methods.
+
 ### 2.0.2
 
 -   Made path sanitization for Linux - removed starting path with "/" without dir in configuration.
