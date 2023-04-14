@@ -149,7 +149,7 @@ export async function sftpList(config: ISftpListOptions): Promise<ISftpListResul
         const cwd = await sftp.cwd();
         log(config, `List - SFTP Connection established. Remote working directory is cwd: ${cwd}.`, config.connectionSettings?.dir);
 
-        const realPath = pathCombine(config.connectionSettings.dir, config.directory || "");
+        const realPath = await sftp.realPath(pathCombine(config.connectionSettings.dir, config.directory || ""));
         log(config, `List - SFTP real path resolved: ${realPath}.`);
         const fileInfos = await sftp.list(realPath);
         log(config, "List - files listed.");
