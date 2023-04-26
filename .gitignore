@@ -7,4 +7,6 @@
 /cypress/support/*.map
 /cypress/integration/*.js
 /cypress/integration/*.map
+/cypress/e2e/*.js
+/cypress/e2e/*.map
 /dist

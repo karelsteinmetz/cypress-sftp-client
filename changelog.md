@@ -1,5 +1,9 @@
 # Changelog
 
+### 4.0.0
+
+-   Cypress updated to 10.8.0.
+
 ### 3.0.2
 
 -   Added real path sftp wrapping logs for issues investigation.
