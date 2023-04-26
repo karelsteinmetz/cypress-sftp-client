@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.2
+
+-   Added real path sftp wrapping logs for issues investigation.
+
 ### 3.0.1
 
 -   Used real path sftp wrapping for each dir/file methods - fixed listing method.
