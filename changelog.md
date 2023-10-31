@@ -1,5 +1,11 @@
 # Changelog
 
+
+### 4.1.0
+
+-   Stringfied report to assertion message of sftp commands.
+
+
 ### 4.0.0
 
 -   Cypress updated to 10.8.0.

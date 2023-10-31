@@ -13,7 +13,7 @@ Cypress.Commands.add("sftpCreateDirectory", function (options) {
     }, Object.assign(cmdOptions, { log: false }))
         .then(function (result) { return result; })
         .then(function (report) { return sftpResultLog(cmdOptions, report); })
-        .should(function (report) { return expect(report.status, `Report status assertion. Report object is: ${JSON.stringify(report)}`).to.be.true; });
+        .should(function (report) { return expect(report.status, "Report status assertion. Report object is: " + JSON.stringify(report)).to.be.true; });
 });
 Cypress.Commands.add("sftpRemoveDirectory", function (options) {
     var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
@@ -28,7 +28,7 @@ Cypress.Commands.add("sftpRemoveDirectory", function (options) {
     }, Object.assign(cmdOptions, { log: false }))
         .then(function (result) { return result; })
         .then(function (report) { return sftpResultLog(cmdOptions, report); })
-        .should(function (report) { return expect(report.status, `Report status assertion. Report object is: ${JSON.stringify(report)}`).to.be.true; });
+        .should(function (report) { return expect(report.status, "Report status assertion. Report object is: " + JSON.stringify(report)).to.be.true; });
 });
 Cypress.Commands.add("sftpList", function (options) {
     var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
@@ -43,7 +43,7 @@ Cypress.Commands.add("sftpList", function (options) {
     }, Object.assign(cmdOptions, { log: false }))
         .then(function (result) { return result; })
         .then(function (report) { return sftpResultLog(cmdOptions, report); })
-        .should(function (report) { return expect(report.status, `Report status assertion. Report object is: ${JSON.stringify(report)}`).to.be.true; });
+        .should(function (report) { return expect(report.status, "Report status assertion. Report object is: " + JSON.stringify(report)).to.be.true; });
 });
 Cypress.Commands.add("sftpExists", function (options) {
     var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
@@ -58,7 +58,7 @@ Cypress.Commands.add("sftpExists", function (options) {
     }, Object.assign(cmdOptions, { log: false }))
         .then(function (result) { return result; })
         .then(function (report) { return sftpResultLog(cmdOptions, report); })
-        .should(function (report) { return expect(report.status, `Report status assertion. Report object is: ${JSON.stringify(report)}`).to.be.true; });
+        .should(function (report) { return expect(report.status, "Report status assertion. Report object is: " + JSON.stringify(report)).to.be.true; });
 });
 Cypress.Commands.add("sftpDownload", function (options) {
     var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
@@ -73,7 +73,7 @@ Cypress.Commands.add("sftpDownload", function (options) {
     }, Object.assign(cmdOptions, { log: false }))
         .then(function (result) { return result; })
         .then(function (report) { return sftpResultLog(cmdOptions, report); })
-        .should(function (report) { return expect(report.status, `Report status assertion. Report object is: ${JSON.stringify(report)}`).to.be.true; });
+        .should(function (report) { return expect(report.status, "Report status assertion. Report object is: " + JSON.stringify(report)).to.be.true; });
 });
 Cypress.Commands.add("sftpUpload", function (options) {
     var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
@@ -89,7 +89,7 @@ Cypress.Commands.add("sftpUpload", function (options) {
     }, Object.assign(cmdOptions, { log: false }))
         .then(function (result) { return result; })
         .then(function (report) { return sftpResultLog(cmdOptions, report); })
-        .should(function (report) { return expect(report.status, `Report status assertion. Report object is: ${JSON.stringify(report)}`).to.be.true; });
+        .should(function (report) { return expect(report.status, "Report status assertion. Report object is: " + JSON.stringify(report)).to.be.true; });
 });
 Cypress.Commands.add("sftpDelete", function (options) {
     var cmdOptions = Object.assign(typeof options === "object" ? options : {}, {
@@ -104,7 +104,7 @@ Cypress.Commands.add("sftpDelete", function (options) {
     }, Object.assign(cmdOptions, { log: false }))
         .then(function (result) { return result; })
         .then(function (report) { return sftpResultLog(cmdOptions, report); })
-        .should(function (report) { return expect(report.status, `Report status assertion. Report object is: ${JSON.stringify(report)}`).to.be.true; });
+        .should(function (report) { return expect(report.status, "Report status assertion. Report object is: " + JSON.stringify(report)).to.be.true; });
 });
 function sftpResultLog(options, report) {
     var consoleProps = Object.assign({
